@@ -106,9 +106,9 @@ class SharedRunnerPlugin(object):
             if failed:
                 attach_html(path.join(shared_config['temp-folder'], '500.html'))
                 attach_html(path.join(shared_config['temp-folder'], '404.html'))
-                screenshot_content = PageCommon.make_screenshot()
-                if screenshot_content:
-                    allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
+                #screenshot_content = PageCommon.make_screenshot()
+                #if screenshot_content:
+                #    allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
             # client.close_browser()
 
     @classmethod

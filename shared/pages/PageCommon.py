@@ -1,15 +1,12 @@
 from shared.logger.logger import get_logger
-from playwright.sync_api import Page, Browser
 
 log = get_logger(__name__)
 
 
 class PageCommon:
 
-    def __init__(self, browser: Browser, **kwargs):
-        self.browser = browser
-        self.context = self.browser.new_context(**kwargs)
-        self.page = self.context.new_page()
+    def __init__(self, page):
+        self.page = page
 
     def click_on_login_button(self):
         log.info('Click on Log in button')
@@ -33,7 +30,6 @@ class PageCommon:
         error_text = self.page.locator('#iloginRejectReason').text_content()
         return error_text
 
-    @classmethod
     def make_screenshot(self):
         screenshot = self.page.screenshot(type='png', path='screenshot.png')
         return screenshot
