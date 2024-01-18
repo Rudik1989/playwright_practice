@@ -10,3 +10,5 @@ pytest-base-url==2.0.0
 pytest-playwright==0.4.3
 requests==2.31.0
 urllib3==2.1.0
+allure-pytest==2.9.41
+pyyaml==6.0.1
