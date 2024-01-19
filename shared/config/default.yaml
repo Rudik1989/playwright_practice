@@ -1,4 +1,5 @@
 base-url: https://4shared.com
 device: Pixel 5
-temp-folder: .\results\
+temp-folder: results
 test-results-folder: shared/results
+storage-dump: ''

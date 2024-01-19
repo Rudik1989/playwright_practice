@@ -1,35 +1,41 @@
 from shared.logger.logger import get_logger
+from shared.client import SharedClient
 
 log = get_logger(__name__)
 
 
 class PageCommon:
 
-    def __init__(self, page):
-        self.page = page
+    client = SharedClient()
 
-    def click_on_login_button(self):
+    @classmethod
+    def click_on_login_button(cls):
         log.info('Click on Log in button')
-        self.page.get_by_text('Log in').click()
+        cls.client.page.get_by_text('Log in').click()
 
-    def fill_email_field(self, email: str):
+    @classmethod
+    def fill_email_field(cls, email: str):
         log.info(f'Fill email field: {email}')
-        self.page.locator('#login').fill(email)
+        cls.client.page.locator('#login').fill(email)
 
-    def fill_password_field(self, password: str):
+    @classmethod
+    def fill_password_field(cls, password: str):
         log.info(f'Fill password field: {password}')
-        self.page.locator("#password").fill(password)
+        cls.client.page.locator("#password").fill(password)
 
-    def click_on_sign_in_button(self):
+    @classmethod
+    def click_on_sign_in_button(cls):
         log.info(f'Click on Sign in button')
-        self.page.locator('.big-button.b-w.jsLogIn').click()
+        cls.client.page.locator('.big-button.b-w.jsLogIn').click()
 
-    def get_login_error_text(self):
+    @classmethod
+    def get_login_error_text(cls):
         log.info('Get error text')
-        self.page.wait_for_selector('#iloginRejectReason')
-        error_text = self.page.locator('#iloginRejectReason').text_content()
+        cls.client.page.wait_for_selector('#iloginRejectReason')
+        error_text = cls.client.page.locator('#iloginRejectReason').text_content()
         return error_text
 
-    def make_screenshot(self):
-        screenshot = self.page.screenshot(type='png', path='screenshot.png')
+    @classmethod
+    def make_screenshot(cls):
+        screenshot = cls.client.page.screenshot(type='png', path='screenshot.png')
         return screenshot

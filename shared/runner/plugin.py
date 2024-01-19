@@ -2,6 +2,7 @@ import json
 import logging
 from os import path, makedirs,  getcwd, listdir, remove
 import shutil
+from pkgutil import iter_modules
 
 import yaml
 import allure
@@ -9,6 +10,7 @@ import allure
 from shared.logger.logger import get_logger, log_config_path
 from shared.logger.handlers import TestDependentRotatingFileHandler
 from shared.config.config import shared_config
+from shared import fixtures
 from shared.pages.PageCommon import PageCommon
 
 
@@ -72,6 +74,22 @@ class SharedRunnerPlugin(object):
             with open(environment_file_path, 'w') as environment_file:
                 environment_file.write(f'staging_name={shared_config["base-url"]}\n')
             # endregion
+
+    @classmethod
+    def pytest_configure(cls, config):
+        if cls.enabled:
+            # set native traceback style
+            config.option.tbstyle = 'native'
+
+            # region load fixtures
+            fixtures_dir = path.dirname(fixtures.__file__)
+            for importer, package_name, _ in iter_modules([fixtures_dir]):
+                package = importer.find_module(package_name).load_module(package_name)
+                config.pluginmanager.register(package, package_name)
+            # endregion
+
+            # clear log filename for test dependent logging handler
+            TestDependentRotatingFileHandler.log_filename = None
 
     @classmethod
     def pytest_runtest_setup(cls, item):
