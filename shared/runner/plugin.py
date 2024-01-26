@@ -145,5 +145,5 @@ class SharedRunnerPlugin(object):
         test_results_path.insert(0, shared_config['test-results-folder'])
         test_log_filename = '%s.txt' % path.join(*test_results_path)
         test_log_filename = test_log_filename.replace('"', '')
-        test_log_filename = path.join(getcwd(), '../..', test_log_filename)
+        test_log_filename = path.join(getcwd(), test_log_filename)
         return test_log_filename

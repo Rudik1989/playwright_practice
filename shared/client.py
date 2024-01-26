@@ -52,5 +52,5 @@ class SharedClient:
     @classmethod
     def take_screenshot(cls):
         # screenshot_path = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results', 'screenshot.png')
-        screenshot_path = path.join(getcwd(), '../..', 'allure-results', 'screenshot.png')
+        screenshot_path = path.join(getcwd(), 'allure-results', 'screenshot.png')
         cls.page.screenshot(path=screenshot_path)
