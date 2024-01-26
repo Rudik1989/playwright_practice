@@ -66,8 +66,8 @@ class SharedRunnerPlugin(object):
                     # endregion
 
             # region enable allure logging
-            config.option.allure_report_dir = path.join(getcwd(), '../..', shared_config['test-results-folder'],
-                                                        'allure-results')
+            # config.option.allure_report_dir = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results')
+            config.option.allure_report_dir = path.join(getcwd(), '../..', 'allure-results')
             makedirs(config.option.allure_report_dir, exist_ok=True)
             # endregion
             # Generate environment.properties file
@@ -128,7 +128,7 @@ class SharedRunnerPlugin(object):
                 client = SharedClient()
                 screenshot_content = client.take_screenshot()
                 if screenshot_content:
-                   allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
+                    allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
             # client.close_browser()
 
     @classmethod
