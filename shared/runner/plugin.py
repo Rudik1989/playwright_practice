@@ -67,7 +67,7 @@ class SharedRunnerPlugin(object):
 
             # region enable allure logging
             # config.option.allure_report_dir = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results')
-            config.option.allure_report_dir = path.join(getcwd(), '../..', 'allure-results')
+            config.option.allure_report_dir = path.join(getcwd(), 'allure-results')
             makedirs(config.option.allure_report_dir, exist_ok=True)
             print('!!!!!!!!!!!!!!______________!!!!!!!!!!!!!!!!')
             print(config.option.allure_report_dir)
