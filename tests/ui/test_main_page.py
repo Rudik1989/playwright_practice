@@ -14,5 +14,3 @@ class TestMainPage:
         PageCommon.click_on_login_button()
         PageCommon.click_on_sign_in_button()
         assert_that(PageCommon.get_login_error_text(), equal_to('Empty login'), "Wrong error is shown")
-
-

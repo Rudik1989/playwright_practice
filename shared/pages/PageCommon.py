@@ -36,6 +36,6 @@ class PageCommon:
         return error_text
 
     @classmethod
-    def make_screenshot(cls):
-        screenshot = cls.client.page.screenshot(type='png', path='screenshot.png')
+    def make_screenshot(cls, path):
+        screenshot = cls.client.page.screenshot(type='png', path=path)
         return screenshot

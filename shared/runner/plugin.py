@@ -11,7 +11,7 @@ from shared.logger.logger import get_logger, log_config_path
 from shared.logger.handlers import TestDependentRotatingFileHandler
 from shared.config.config import shared_config
 from shared import fixtures
-from shared.pages.PageCommon import PageCommon
+from shared.client import SharedClient
 
 
 log = get_logger()
@@ -52,17 +52,18 @@ class SharedRunnerPlugin(object):
                 logging.config.dictConfig(log_config)
             # endregion
 
-            # region clean results folder
+            # region clean results folderr
             delete_folder_path = path.join(getcwd(), '../..', shared_config['test-results-folder'])
-            for file_or_dir in listdir(delete_folder_path):
-                full_path = path.join(delete_folder_path, file_or_dir)
-                if path.isfile(full_path):
-                    # Remove file
-                    remove(full_path)
-                elif path.isdir(full_path):
-                    # Remove directory and its contents
-                    shutil.rmtree(full_path)
-            # endregion
+            if path.exists(delete_folder_path) and path.isdir(delete_folder_path):
+                for file_or_dir in listdir(delete_folder_path):
+                    full_path = path.join(delete_folder_path, file_or_dir)
+                    if path.isfile(full_path):
+                        # Remove file
+                        remove(full_path)
+                    elif path.isdir(full_path):
+                        # Remove directory and its contents
+                        shutil.rmtree(full_path)
+                    # endregion
 
             # region enable allure logging
             config.option.allure_report_dir = path.join(getcwd(), '../..', shared_config['test-results-folder'],
@@ -124,9 +125,10 @@ class SharedRunnerPlugin(object):
             if failed:
                 attach_html(path.join(shared_config['temp-folder'], '500.html'))
                 attach_html(path.join(shared_config['temp-folder'], '404.html'))
-                #screenshot_content = PageCommon.make_screenshot()
-                #if screenshot_content:
-                #    allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
+                client = SharedClient()
+                screenshot_content = client.take_screenshot()
+                if screenshot_content:
+                   allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
             # client.close_browser()
 
     @classmethod

@@ -1,4 +1,3 @@
-from playwright.sync_api import sync_playwright
 import pytest
 
 from shared.config.config import shared_config
@@ -10,4 +9,3 @@ def open_browser(client):
     client.go_to(shared_config['base-url'])
     yield client
     client.close()
-

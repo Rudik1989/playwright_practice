@@ -1,4 +1,5 @@
 import os
+from os import getcwd, path
 
 from playwright.sync_api import sync_playwright, Browser, Playwright, Page
 
@@ -28,7 +29,10 @@ class SharedClient:
                                               storage_state=state_file)
             cls.IS_LOGGED = True
         else:
-            context = cls.browser.new_context(ignore_https_errors=True)
+            video_path = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results')
+            context = cls.browser.new_context(ignore_https_errors=True, viewport={'width': 1920, 'height': 1080},
+                                              record_video_dir=video_path,
+                                              record_video_size={'width': 960, 'height': 680})
         cls.playwright = playwright
         cls.browser = context.browser
         cls.page = context.new_page()
@@ -44,3 +48,9 @@ class SharedClient:
     @classmethod
     def go_to(cls, url):
         cls.page.goto(url)
+
+    @classmethod
+    def take_screenshot(cls):
+        screenshot_path = path.join(getcwd(), '../..', shared_config['test-results-folder'],
+                                    'allure-results', 'screenshot.png')
+        cls.page.screenshot(path=screenshot_path)
