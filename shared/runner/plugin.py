@@ -1,6 +1,6 @@
 import json
 import logging
-from os import path, makedirs,  getcwd, listdir, remove
+from os import path, makedirs,  getcwd, listdir, remove, walk
 import shutil
 from pkgutil import iter_modules
 
@@ -131,6 +131,35 @@ class SharedRunnerPlugin(object):
                 screenshot_content = client.take_screenshot()
                 if screenshot_content:
                     allure.attach(screenshot_content, 'screenshot', allure.attachment_type.PNG)
+
+                def find_file_by_extension(directory, extension):
+                    for root, dirs, files in walk(directory):
+                        for file in files:
+                            if file.endswith("." + extension):
+                                return path.join(root, file)
+                    return None
+
+                def attach_webm_to_allure(directory_path):
+                    file_extension = "webm"
+
+                    # Find a WebM file in the "result" directory
+                    found_file = find_file_by_extension(path.join(directory_path, "result"), file_extension)
+
+                    if found_file:
+                        # Read the binary content of the WebM file
+                        webm_content = open(found_file, "rb").read()
+
+                        # Attach the WebM file to Allure report with a dynamic title
+                        webm_title = path.basename(found_file)
+                        allure.attach(webm_content, webm_title, allure.attachment_type.WEBM)
+                        print(f"WebM file found and attached to Allure: {found_file}")
+                    else:
+                        print(f"No WebM file found in the 'result' directory.")
+
+                # Example usage
+                directory_path = getcwd()
+                print('!!directory_path', directory_path)
+                attach_webm_to_allure(directory_path)
             # client.close_browser()
 
     @classmethod
