@@ -160,3 +160,5 @@ cython_debug/
 .idea/
 result
 
+/tests/ui/allure-results/
+/tests/ui/results/

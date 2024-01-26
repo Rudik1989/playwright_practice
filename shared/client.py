@@ -29,7 +29,7 @@ class SharedClient:
                                               storage_state=state_file)
             cls.IS_LOGGED = True
         else:
-            video_path = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results')
+            video_path = path.join(getcwd(), 'allure-results')
             context = cls.browser.new_context(ignore_https_errors=True, viewport={'width': 1920, 'height': 1080},
                                               record_video_dir=video_path,
                                               record_video_size={'width': 960, 'height': 680})
