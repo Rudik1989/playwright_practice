@@ -143,7 +143,7 @@ class SharedRunnerPlugin(object):
                     file_extension = "webm"
 
                     # Find a WebM file in the "result" directory
-                    found_file = find_file_by_extension(path.join(directory_path, "result"), file_extension)
+                    found_file = find_file_by_extension(directory_path, file_extension)
 
                     if found_file:
                         # Read the binary content of the WebM file
@@ -157,7 +157,7 @@ class SharedRunnerPlugin(object):
                         print(f"No WebM file found in the 'result' directory.")
 
                 # Example usage
-                directory_path = path.join(getcwd(), 'allure-results')
+                directory_path = getcwd(), 'allure-results'
                 print('!!directory_path', directory_path)
                 attach_webm_to_allure(directory_path)
             # client.close_browser()
