@@ -1,0 +1,37 @@
+{
+    "version": 1,
+    "disable_existing_loggers": true,
+    "formatters": {
+        "simple": {
+            "format": "%(asctime)s %(levelname)s: %(message)s",
+            "datefmt": "%d.%m.%Y %H:%M:%S"
+        },
+        "precise": {
+            "format": "%(asctime)s (%(name)s) %(levelname)s: %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "stream": "ext://sys.stdout",
+            "formatter": "simple"
+        },
+        "testDependentRotatingFileHandler": {
+            "class": "shared.logger.handlers.TestDependentRotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "precise"
+        },
+        "allure": {
+            "class": "shared.logger.handlers.AllureHandler",
+            "level": "INFO"
+        }
+    },
+    "loggers": {
+        "shared": {
+            "level": "DEBUG",
+            "handlers": ["console", "allure", "testDependentRotatingFileHandler"],
+            "propagate": false
+        }
+    }
+}
