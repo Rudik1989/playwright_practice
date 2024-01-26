@@ -157,7 +157,7 @@ class SharedRunnerPlugin(object):
                         print(f"No WebM file found in the 'result' directory.")
 
                 # Example usage
-                directory_path = getcwd()
+                directory_path = path.join(getcwd(), 'allure-results')
                 print('!!directory_path', directory_path)
                 attach_webm_to_allure(directory_path)
             # client.close_browser()
