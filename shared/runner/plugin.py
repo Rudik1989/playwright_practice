@@ -69,6 +69,8 @@ class SharedRunnerPlugin(object):
             # config.option.allure_report_dir = path.join(getcwd(), '../..', shared_config['test-results-folder'], 'allure-results')
             config.option.allure_report_dir = path.join(getcwd(), '../..', 'allure-results')
             makedirs(config.option.allure_report_dir, exist_ok=True)
+            print('!!!!!!!!!!!!!!______________!!!!!!!!!!!!!!!!')
+            print(config.option.allure_report_dir)
             # endregion
             # Generate environment.properties file
             environment_file_path = path.join(config.option.allure_report_dir, 'environment.properties')
