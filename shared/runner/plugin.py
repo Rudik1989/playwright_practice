@@ -1,6 +1,6 @@
 import json
 import logging
-from os import path, makedirs,  getcwd, listdir, remove, walk
+from os import path, makedirs, getcwd, listdir, remove, walk
 import shutil
 from pkgutil import iter_modules
 
@@ -155,7 +155,7 @@ class SharedRunnerPlugin(object):
                         allure.attach(webm_content, webm_title, allure.attachment_type.WEBM)
                         print(f"WebM file found and attached to Allure: {found_file}")
                     else:
-                        print(f"No WebM file found in the 'result' directory.")
+                        print("No WebM file found in the 'result' directory.")
 
                 # Example usage
                 directory_path = path.join(getcwd(), 'allure-results')

@@ -25,7 +25,7 @@ class PageCommon:
 
     @classmethod
     def click_on_sign_in_button(cls):
-        log.info(f'Click on Sign in button')
+        log.info('Click on Sign in button')
         cls.client.page.locator('.big-button.b-w.jsLogIn').click()
 
     @classmethod
